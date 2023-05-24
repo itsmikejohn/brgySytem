@@ -23,4 +23,8 @@
     <p class="p-2 font-bold">{TITLE}</p>
     <input type="password" placeholder={PLACEHOLDER} bind:value={BINDTHIS} 
     class="w-full h-10 bg-slate-100 p-2 focus:outline-none "/>
+{:else if TYPE === "number"}
+<p class="p-2 font-bold">{TITLE}</p>
+    <input type="number" placeholder={PLACEHOLDER} bind:value={BINDTHIS} 
+    class="w-full h-10 bg-slate-100 p-2 focus:outline-none "/>
 {/if}

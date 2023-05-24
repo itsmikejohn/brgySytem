@@ -10,6 +10,7 @@
     //database calls and hooks
     import { auth } from "../../db/firebase";
     import { signOut } from "firebase/auth";
+    import ListOfVoters from "../LiveComponents/ListOfVoters.svelte";
 
     //slide menu
     const showSliderMenu = () => {
@@ -46,7 +47,9 @@
         </div>
     </div>
     {#if $navSelections === "Dashboard"}
-    <DashBoard />
+        <DashBoard />
+    {:else if $navSelections === "List of registered voters"}
+        <ListOfVoters />
     {/if}
    
 </div>
