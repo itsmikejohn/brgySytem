@@ -4,22 +4,23 @@
     import { fly } from "svelte/transition";
     import { createEventDispatcher } from "svelte";
     import logo from "../Images/logo.png";
-    import { showSlider } from './clickOutside.js'
+    import { showSlider, navSelections } from './clickOutside.js'
 
     import Button from "../GeneralComponents/Button.svelte";
 
-    let selections = ["Dashboard", "List of registered voters", "Barangay ID", "Barangay Certificate", "Barangay Clearance"];
-    export let activeItem = "Dashboard";    
+    //slider list of menu
+    let selections = ["Dashboard", "List of registered voters", "Barangay ID", "Barangay Certificate", "Barangay Clearance"]; 
 
-    let dispatch = createEventDispatcher();
-
+    //value grabber from menu
     const getValue = (data) => {
-        activeItem = data;
-    }
-
-    const back = () => {
+        navSelections.set(data);
         showSlider.set(false);
     }
+
+    //close slider
+    const back = () => {
+        showSlider.set(false);
+    }  
 
 
 </script>
@@ -33,7 +34,7 @@
         {#each selections as value}
         <div class="">
             <p class="p-4 hover:bg-slate-400 sm:text-2xl cursor-pointer transition-all hover:scale-105 active:scale-95"
-            class:active={activeItem === value}
+            class:active={$navSelections === value}
             on:keydown={() => {}}
             on:click={() => {getValue(value)}}
 
