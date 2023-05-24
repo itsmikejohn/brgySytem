@@ -6,3 +6,6 @@ export const navSelections = writable("Dashboard");
 
 //list of registered voters
 export const showAdd = writable(false);
+export const onSnaps = writable([]);
+export const showEditModalLogic = writable(false);
+export const compareValue = writable("");

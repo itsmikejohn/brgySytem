@@ -2,11 +2,11 @@
     import Button from "../GeneralComponents/Button.svelte";
     import Inputs from "../GeneralComponents/Inputs.svelte";
 
-    import { showAdd } from "../BoundComponents/clickOutside";
+    import { showAdd, onSnaps, showEditModalLogic, compareValue } from "../BoundComponents/clickOutside";
 
     //database calls and hooks
     import { auth, db } from "../../db/firebase";
-    import { addDoc } from "firebase/firestore";
+    import { addDoc, collection, serverTimestamp, onSnapshot, query, orderBy, increment, deleteDoc, doc, setDoc } from "firebase/firestore";
 
     //toggle show modal of add voter
     const showAddModal = () => {
@@ -14,10 +14,67 @@
     }
 
     //handler for send data of addVoter
+    const listOfVotersStore = {
+        completeName: "",
+        precintNum: "",
+        completeAddress: "",
+    }
     const addVoter = async() => {
+       const colRef = collection(db, "votersList");
+       await addDoc(colRef, {
+            createdAt: serverTimestamp(),
+            completeName: listOfVotersStore.completeName.BINDTHIS,
+            precintNumber: listOfVotersStore.precintNum.BINDTHIS,
+            completeAddress: listOfVotersStore.completeAddress.BINDTHIS,
+            voterCounter: increment(1),
+       }).then(() => {
+            listOfVotersStore.completeName.BINDTHIS = "";
+            listOfVotersStore.precintNum.BINDTHIS = "";
+            listOfVotersStore.completeAddress.BINDTHIS = "";
+       })
+    }
+
+    //database loop data
+    const colRef = collection(db, "votersList");
+    const q = query(colRef, orderBy("createdAt", "desc"))
+    onSnapshot(q, (snapshots) => {
+        let fbData = [];
+        snapshots.docs.forEach(doc => {
+            let data = {...doc.data(), id: doc.id}
+            fbData = [data, ...fbData];
+        })
+        onSnaps.set(fbData);
+    })
+
+    //database remove data
+    const removeData = async(data) => {
+        const docRef = doc(colRef, data);
+        await deleteDoc(docRef);
+    }
+
+    //database update data
+    const updateData = async(data) => {
+        const docRef = doc(colRef, data)
+        setDoc(docRef, {
+            lastUpdated: serverTimestamp(),
+            completeName: listOfVotersStore.completeName.BINDTHIS,
+            precintNumber: listOfVotersStore.precintNum.BINDTHIS,
+            completeAddress: listOfVotersStore.completeAddress.BINDTHIS,
+        }, {merge:true}).then(() => {
+            listOfVotersStore.completeName.BINDTHIS = "";
+            listOfVotersStore.precintNum.BINDTHIS = "";
+            listOfVotersStore.completeAddress.BINDTHIS = "";
+        })
 
     }
 
+    //showEditModal
+    const showEditModal = (i) => {
+        showEditModalLogic.set(true);
+        compareValue.set(i)
+    }
+
+    
 </script>
 
 <div class="m-2 sm:max-w-[900px] mx-auto">
@@ -31,13 +88,13 @@
         <div class="flex flex-col gap-2 bg-white p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-slate-200">
             <div class="flex gap-2 justify-center">
                 <div class="">
-                    <Inputs TITLE="Name:" PLACEHOLDER="Complete Name"/>
+                    <Inputs TITLE="Name:" PLACEHOLDER="Complete Name" bind:this={listOfVotersStore.completeName}/>
                 </div>
                 <div class="">
-                    <Inputs TITLE="PRECINT#:" PLACEHOLDER="Precint Number" TYPE="number"/>
+                    <Inputs TITLE="PRECINT#:" PLACEHOLDER="Precint Number" TYPE="number" bind:this={listOfVotersStore.precintNum}/>
                 </div>
                 <div class="">
-                    <Inputs TITLE="ADDRESS:" PLACEHOLDER="Complete Address"/>
+                    <Inputs TITLE="ADDRESS:" PLACEHOLDER="Complete Address" bind:this={listOfVotersStore.completeAddress}/>
                 </div>
             </div>
             
@@ -57,19 +114,41 @@
                 <p class="text-xl sm:text-2xl font-bold text-left w-full ">Precint#</p>
                 <p class="text-xl sm:text-2xl font-bold text-left w-full ">Address</p>
             </div>
+            {#each $onSnaps as value , i}
+                <div class="bg-slate-300 p-4 rounded-lg mt-2">
+                    <div class="flex gap-2 justify-center items-center">
+                        <p class="w-full text-white">{value.completeName}</p>
+                        <p class="w-full text-white">{value.precintNumber}</p>
+                        <p class="w-full text-white">{value.completeAddress}</p>
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <Button TITLE="Delete" on:click={()=>{removeData(value.id)}}/>
+                        <Button TITLE="Edit" on:click={()=>{showEditModal(i)}}/>
+                    </div>
 
-            <div class="bg-slate-300 p-4 rounded-lg mt-2">
-                <div class="flex gap-2 justify-center items-center">
-                    <p class="w-full text-white">Peter, Pan Magic</p>
-                    <p class="w-full text-white">65984564322358</p>
-                    <p class="w-full text-white">283 Alley 82, Lakas, Pasig, City</p>
+                    {#if $compareValue === i}
+                    <div class="flex flex-col gap-2 bg-red-300 p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-slate-200 z-10">
+                        <div class="flex gap-2 justify-center">
+                            <div class="">
+                                <Inputs TITLE="Name:" PLACEHOLDER="Complete Name" bind:this={listOfVotersStore.completeName}/>
+                            </div>
+                            <div class="">
+                                <Inputs TITLE="PRECINT#:" PLACEHOLDER="Precint Number" TYPE="number" bind:this={listOfVotersStore.precintNum}/>
+                            </div>
+                            <div class="">
+                                <Inputs TITLE="ADDRESS:" PLACEHOLDER="Complete Address" bind:this={listOfVotersStore.completeAddress}/>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <Button TITLE="Confirm Edit" on:click={() => {updateData(value.id)}}/>
+                            <Button TITLE="Close" on:click={showEditModal}/>
+                        </div>
+                        
+                    </div>
+                    {/if}
                 </div>
-                <div class="flex gap-2 mt-4">
-                    <Button TITLE="Delete"/>
-                    <Button TITLE="Edit"/>
-                </div>
-            </div>
-            
+            {/each}
         </div>
         
     </div>
