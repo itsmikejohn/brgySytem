@@ -1,12 +1,24 @@
 <script>
+    
     import Button from "../GeneralComponents/Button.svelte"
     import NavSlider from "./NavSlider.svelte";
     import { showSlider } from "./clickOutside";
 
+    //database calls and hooks
+    import { auth } from "../../db/firebase";
+    import { signOut } from "firebase/auth";
+
+    //slide menu
     const showSliderMenu = () => {
         showSlider.set(true);
     }
 
+    //logout user from system
+    const logout = async() => {
+        await signOut(auth).then(()=>{
+            localStorage.removeItem("uid");
+        })
+    }
 </script>
 
 <div class="">
@@ -31,7 +43,7 @@
                 
             </div>
             <div class="w-full">
-                <Button title="Logout"/>
+                <Button TITLE="Logout" on:click={logout}/>
             </div>
             
         </div>

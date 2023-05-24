@@ -4,7 +4,7 @@
     import { fly } from "svelte/transition";
     import { createEventDispatcher } from "svelte";
     import logo from "../Images/logo.png";
-    import { clickOutside, showSlider } from './clickOutside.js'
+    import { showSlider } from './clickOutside.js'
 
     import Button from "../GeneralComponents/Button.svelte";
 
@@ -42,7 +42,7 @@
         {/each}
         
         <div class="mt-5">
-            <Button title="Back" on:click={back}/>
+            <Button TITLE="Close" on:click={back}/>
         </div>
         
     </div>
