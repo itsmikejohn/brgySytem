@@ -9,7 +9,7 @@
     import Button from "../GeneralComponents/Button.svelte";
 
     //slider list of menu
-    let selections = ["Dashboard", "List of registered voters", "Barangay ID", "Barangay Certificate", "Barangay Clearance"]; 
+    let selections = ["Dashboard", "List of registered voters", "Barangay ID", "Barangay Certificate", "Barangay Clearance", "Complaints"]; 
 
     //value grabber from menu
     const getValue = (data) => {

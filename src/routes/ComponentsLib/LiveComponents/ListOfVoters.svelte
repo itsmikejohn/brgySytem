@@ -129,6 +129,7 @@
 
                     {#if $compareValue === i}
                     <div class="flex flex-col gap-2 bg-red-300 p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-slate-200 z-10">
+                        <p class="text-xl text-center font-bold p-2 text-slate-500">Modify Values</p>
                         <div class="flex gap-2 justify-center">
                             <div class="">
                                 <Inputs TITLE="Name:" PLACEHOLDER="Complete Name" bind:this={listOfVotersStore.completeName}/>

@@ -11,6 +11,10 @@
     import { auth } from "../../db/firebase";
     import { signOut } from "firebase/auth";
     import ListOfVoters from "../LiveComponents/ListOfVoters.svelte";
+    import BarangayId from "../LiveComponents/BarangayID.svelte";
+    import BarangayCertificate from "../LiveComponents/BarangayCertificate.svelte";
+    import BarangayClearance from "../LiveComponents/BarangayClearance.svelte";
+    import Complaint from "../LiveComponents/Complaint.svelte";
 
     //slide menu
     const showSliderMenu = () => {
@@ -50,8 +54,16 @@
         <DashBoard />
     {:else if $navSelections === "List of registered voters"}
         <ListOfVoters />
+    {:else if $navSelections === "Barangay ID"}
+        <BarangayId />
+    {:else if $navSelections === "Barangay Certificate"}
+        <BarangayCertificate />
+    {:else if $navSelections === "Barangay Clearance"}
+        <BarangayClearance />
+    {:else if $navSelections === "Complaints"}
+        <Complaint />
     {/if}
-   
+    
 </div>
 
 <NavSlider />
