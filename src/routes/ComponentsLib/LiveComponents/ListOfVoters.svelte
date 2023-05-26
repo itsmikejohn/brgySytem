@@ -2,7 +2,7 @@
     import Button from "../GeneralComponents/Button.svelte";
     import Inputs from "../GeneralComponents/Inputs.svelte";
 
-    import { showAdd, onSnaps, showEditModalLogic, compareValue } from "../BoundComponents/clickOutside";
+    import { showAdd, onSnaps, compareValue } from "../BoundComponents/clickOutside";
 
     //database calls and hooks
     import { auth, db } from "../../db/firebase";
@@ -70,7 +70,6 @@
 
     //showEditModal
     const showEditModal = (i) => {
-        showEditModalLogic.set(true);
         compareValue.set(i)
     }
 
@@ -123,9 +122,9 @@
             {#each $onSnaps as value , i}
                 <div class="">
                     <div class="flex justify-center items-center ">
-                        <p class="w-full border-2 border-white bg-slate-100 p-2">{value.completeName}</p>
-                        <p class="w-full border-2 border-white bg-slate-100 p-2">{value.precintNumber}</p>
-                        <p class="w-full border-2 border-white bg-slate-100 p-2">{value.completeAddress}</p>
+                        <p class="w-full border-2 border-white bg-slate-100 p-2 overflow-x-scroll">{value.completeName}</p>
+                        <p class="w-full border-2 border-white bg-slate-100 p-2 overflow-x-scroll">{value.precintNumber}</p>
+                        <p class="w-full border-2 border-white bg-slate-100 p-2 overflow-x-scroll">{value.completeAddress}</p>
                         <div class="flex gap-2 w-full p-2">
                             <Button TITLE="Delete" COLOR="bg-redColor" on:click={()=>{removeData(value.id)}}/>
                             <Button TITLE="Edit" on:click={()=>{showEditModal(i)}}/>

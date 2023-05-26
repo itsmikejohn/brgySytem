@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        "guiColor": "#a53005",
+        "guiColor": "#FDA769",
         "btnColor": "#3c8dbc",
         "redColor": "#f56954",
       }
