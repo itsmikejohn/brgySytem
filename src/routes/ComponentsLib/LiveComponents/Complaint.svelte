@@ -135,7 +135,7 @@
                 <p class="w-full border-2 border-white bg-slate-100 p-2 overflow-x-scroll">{value.complaint}</p>
                 <p class="w-full border-2 border-white bg-slate-100 p-2 overflow-x-scroll">{value.actionTaken}</p>
                 <p class="w-full border-2 border-white bg-slate-100 p-2 overflow-x-scroll">{value.location}</p>
-                <div class="flex gap-2 w-full p-2">
+                <div class="flex gap-2 w-full p-2 bg-slate-100">
                     <Button TITLE="Delete" COLOR="bg-redColor" on:click={removeData(value.id)}/>
                     <Button TITLE="Edit" on:click={()=>{editValueHandler(i)}}/>
                 </div>

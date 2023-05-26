@@ -84,7 +84,7 @@
         
         <!--ADD voters-->
         {#if $showAdd}
-        <div class="flex flex-col gap-2 bg-white p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-slate-200">
+        <div class="flex flex-col gap-2 bg-guiColor p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-slate-200">
             <p class="text-xl text-center font-bold p-2 text-slate-500">Add New Voter</p>
             <div class="flex gap-2 justify-center">
                 <div class="">
@@ -125,7 +125,7 @@
                         <p class="w-full border-2 border-white bg-slate-100 p-2 overflow-x-scroll">{value.completeName}</p>
                         <p class="w-full border-2 border-white bg-slate-100 p-2 overflow-x-scroll">{value.precintNumber}</p>
                         <p class="w-full border-2 border-white bg-slate-100 p-2 overflow-x-scroll">{value.completeAddress}</p>
-                        <div class="flex gap-2 w-full p-2">
+                        <div class="flex gap-2 w-full p-2 bg-slate-100">
                             <Button TITLE="Delete" COLOR="bg-redColor" on:click={()=>{removeData(value.id)}}/>
                             <Button TITLE="Edit" on:click={()=>{showEditModal(i)}}/>
                         </div>
@@ -134,7 +134,7 @@
                  
 
                     {#if $compareValue === i}
-                    <div class="flex flex-col gap-2 bg-red-300 p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-slate-200 z-10">
+                    <div class="flex flex-col bg-guiColor gap-2 p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-slate-200 z-10">
                         <p class="text-xl text-center font-bold p-2 text-slate-500">Modify Values</p>
                         <div class="flex gap-2 justify-center">
                             <div class="">
