@@ -1,5 +1,5 @@
 <script>
-    import loginLogo from "../Images/loginLogo.jpg";
+    import loginLogo from "../Images/logo.png";
     import Inputs from "../GeneralComponents/Inputs.svelte";
     import Button from "../GeneralComponents/Button.svelte";
 
@@ -30,15 +30,17 @@
 </script>
 
 <div class="sm:max-w-xl mx-auto">
-    <div class="p-10 flex flex-col gap-2 bg-purple-500 m-2 rounded-lg">
-        <div class="">
-            <img src={loginLogo} alt="loading" class="w-full]"/>
+    <div class="p-10 flex flex-col gap-2 bg-guiColor m-2 rounded-lg">
+        <div class="flex justify-center">
+            <img src={loginLogo} alt="loading" class="w-[200px]"/>
         </div>
-        <Inputs TYPE="email" PLACEHOLDER="Email" TITLE="Email" bind:this={loginStore.email}/>
-        <Inputs TYPE="password" PLACEHOLDER="Password" TITLE="Password" bind:this={loginStore.password}/>
-        <Button TITLE="Login" on:click={login} bind:this={loginStore.showLoading}/>
+        <Inputs TYPE="email" PLACEHOLDER="Email" TITLE="Email" COLOR="white" bind:this={loginStore.email}/>
+        <Inputs TYPE="password" PLACEHOLDER="Password" TITLE="Password" COLOR="white" bind:this={loginStore.password}/>
         <div class="mt-2">
-            <p class="text-center text-white">{loginStore.showErrorDOMmsg}</p>
+            <Button TITLE="Login" on:click={login} bind:this={loginStore.showLoading}/>
+        </div>
+        <div class="mt-2">
+            <p class="text-center text-[#ff0000] font-bold">{loginStore.showErrorDOMmsg}</p>
         </div>
     </div>
     
