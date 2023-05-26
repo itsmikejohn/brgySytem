@@ -77,10 +77,10 @@
     
 </script>
 
-<div class="m-2 sm:max-w-[900px] mx-auto">
+<div class="m-2 sm:max-w-[1200px] mx-auto">
     <div class="min-h-[50vh] p-4">
-        <div class="max-w-[4rem]">
-            <Button TITLE="Add" on:click={showAddModal}/>
+        <div class="max-w-fit mb-2">
+            <Button TITLE="Add Voter" on:click={showAddModal}/>
         </div>
         
         <!--ADD voters-->
@@ -110,22 +110,29 @@
 
         <div class="">
 
-            <div class="flex gap-2 justify-center items-center">
-                <p class="text-xl sm:text-2xl font-bold text-left w-full ">Name</p>
-                <p class="text-xl sm:text-2xl font-bold text-left w-full ">Precint#</p>
-                <p class="text-xl sm:text-2xl font-bold text-left w-full ">Address</p>
+            <div class="flex  justify-center items-center">
+                <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Name</p>
+                <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Precint#</p>
+                <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Address</p>
+                <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Option</p>
+
+                
+                
+
             </div>
             {#each $onSnaps as value , i}
-                <div class="bg-slate-300 p-4 rounded-lg mt-2">
-                    <div class="flex gap-2 justify-center items-center">
-                        <p class="w-full text-white">{value.completeName}</p>
-                        <p class="w-full text-white">{value.precintNumber}</p>
-                        <p class="w-full text-white">{value.completeAddress}</p>
+                <div class="">
+                    <div class="flex justify-center items-center ">
+                        <p class="w-full border-2 border-white bg-slate-100 p-2">{value.completeName}</p>
+                        <p class="w-full border-2 border-white bg-slate-100 p-2">{value.precintNumber}</p>
+                        <p class="w-full border-2 border-white bg-slate-100 p-2">{value.completeAddress}</p>
+                        <div class="flex gap-2 w-full p-2">
+                            <Button TITLE="Delete" COLOR="bg-redColor" on:click={()=>{removeData(value.id)}}/>
+                            <Button TITLE="Edit" on:click={()=>{showEditModal(i)}}/>
+                        </div>
+                        
                     </div>
-                    <div class="flex gap-2 mt-4">
-                        <Button TITLE="Delete" on:click={()=>{removeData(value.id)}}/>
-                        <Button TITLE="Edit" on:click={()=>{showEditModal(i)}}/>
-                    </div>
+                 
 
                     {#if $compareValue === i}
                     <div class="flex flex-col gap-2 bg-red-300 p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-slate-200 z-10">
