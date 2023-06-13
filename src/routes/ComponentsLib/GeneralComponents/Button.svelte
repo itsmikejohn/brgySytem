@@ -6,7 +6,7 @@
 </script>
 
 
-<button class="w-full p-2 h-10 {COLOR} active:bg-blue-300 transition-all hover:scale-95 active:scale-110 rounded-lg text-white font-bold"
+<button class="w-full px-2 {COLOR} active:bg-blue-300 transition-all hover:scale-95 active:scale-110 rounded-lg text-white font-bold"
 on:click
 >
     {#if LOADING}
