@@ -73,15 +73,26 @@
         compareValue.set(i)
     }
 
+    //print data to external platforms like pdf etc
+    const printFunc = () => {
+        print();
+    }
     
 </script>
 
 <div class="m-2 sm:max-w-[1200px] mx-auto">
     <div class="min-h-[50vh] p-4">
-        <div class="max-w-fit mb-2">
-            <Button TITLE="Add Voter" on:click={showAddModal}/>
+        <div class="max-w-fit mb-2 flex gap-2">
+            <div class="">
+                <Button TITLE="Add Voter" on:click={showAddModal}/>
+            </div>
+
+            <div class="">
+                <Button TITLE="Print" on:click={printFunc}/>
+            </div>
         </div>
         
+       
         <!--ADD voters-->
         {#if $showAdd}
         <div class="flex flex-col gap-2 bg-guiColor p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-slate-200">
