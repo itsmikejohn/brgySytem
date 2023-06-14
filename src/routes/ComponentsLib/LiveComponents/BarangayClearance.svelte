@@ -83,11 +83,33 @@
     }
     
     const handlerSearch = () => {
+        if(bgyVarStore.trigger){
+            const q = query(colRef, orderBy("createdAt", "desc"), where("completeName", "==", bgyVarStore.kwiri))
+            onSnapshot(q, (snapshots) => {
+                let fbData = [];
+                snapshots.docs.forEach(doc => {
+                    let data = {...doc.data(), id: doc.id};
+                    fbData = [data, ...fbData];
+                })
+                onSnapsClearance.set(fbData);
+            })
 
+            bgyVarStore.trigger = false;
+        }
     }
 
     const detectInputs = () => {
         if(bgyVarStore.kwiri.trim().length < 1){
+            const q = query(colRef, orderBy("createdAt", "desc"))
+            onSnapshot(q, (snapshots) => {
+                let fbData = [];
+                snapshots.docs.forEach(doc => {
+                    let data = {...doc.data(), id: doc.id};
+                    fbData = [data, ...fbData];
+                })
+                onSnapsClearance.set(fbData);
+
+            })
             bgyVarStore.trigger = false;
         }else{
             bgyVarStore.trigger = true;
@@ -216,7 +238,7 @@
                 <p class="w-[12%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Purpose</p>
                 <p class="w-[20%] border-2 border-white bg-slate-100 p-2 ">{value.purpose}</p>
 
-                <div class="flex gap-2 w-[30%] bg-slate-100">
+                <div class="flex w-[30%] bg-slate-100">
                     <button class="bg-red-500 font-bold text-white w-full p-2 hover:bg-red-600 border-b-2 border-white"
                     on:click={removeData(value.id)}
                     >Delete</button>
