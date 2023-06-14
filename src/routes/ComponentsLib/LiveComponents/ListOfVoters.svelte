@@ -2,7 +2,7 @@
     import Button from "../GeneralComponents/Button.svelte";
     import Inputs from "../GeneralComponents/Inputs.svelte";
 
-    import { showPrintModel } from "./stateStore";
+    import { showPrintModel, formattedDate } from "./stateStore";
 
     import { showAdd, onSnaps, compareValue } from "../BoundComponents/clickOutside";
 
@@ -82,33 +82,31 @@
 
 
 
-    // Create a new Date object
-    let currentDate = new Date();
-
-    // Get the individual components of the current date
-    let year = currentDate.getFullYear();
-    let month = currentDate.getMonth() + 1; // January is 0, so we add 1
-    let day = currentDate.getDate();
-
-    // Format the date as desired (e.g., YYYY-MM-DD)
-    let formattedDate = year + '-' + month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0');
-
-    // Output the formatted date
 
 
     
 </script>
 
-<div class="m-2 sm:max-w-[1200px] mx-auto">
-    <div class="min-h-[50vh] p-4">
-        <div class="max-w-fit mb-2 flex gap-2">
-            <div class="">
-                <Button TITLE="Add Voter" on:click={showAddModal}/>
+<div class="m-2  mx-auto text-xs">
+    <div class="min-h-[50vh] p-10">
+        <div class=" flex gap-2 items-center mb-2">
+            <div class="w-full flex gap-2">
+                <div class="">
+                    <Button TITLE="Add Voter" on:click={showAddModal}/>
+                </div>
+    
+                <div class="">
+                    <Button TITLE="Print" on:click={() => showPrintModel.set(true)}/>
+                </div>
             </div>
 
-            <div class="">
-                <Button TITLE="Print" on:click={() => showPrintModel.set(true)}/>
+        
+            <div class="flex flex-row-reverse items-center w-full">
+                <button class="bg-blue-400 text-white absolute p-2 border-r-2 border-black hover:bg-blue-700 font-bold">Search</button>
+                <input type="text" placeholder="Complete Name only" class="w-[40%] p-2 focus:outline-none border-2 border-black "/>
+                
             </div>
+            
         </div>
 
         {#if $showPrintModel}
@@ -132,7 +130,7 @@
                     </div>
                     
                     <div class="flex justify-center items-center">
-                        <p class="w-full bg-[#272822] text-white p-2 border-2 font-bold">Name</p>
+                        <p class="w-full bg-[#272822] text-white p-2 border-2 font-bold">Complete Name</p>
                         <p class="w-full bg-[#272822] text-white p-2 border-2 font-bold">Precint #</p>
                         <p class="w-full bg-[#272822] text-white p-2 border-2 font-bold">Address</p>
                     </div>
@@ -170,6 +168,8 @@
                 <Button TITLE="Submit" on:click={addVoter}/>
                 <Button TITLE="Close" on:click={()=>{showAdd.set(false)}}/>
             </div>
+
+            
             
         </div>
         {/if}
@@ -177,25 +177,31 @@
 
         <div class="">
 
-            <div class="flex  justify-center items-center">
-                <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Name</p>
-                <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Precint#</p>
-                <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Address</p>
-                <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Option</p>
-
-                
-                
-
-            </div>
             {#each $onSnaps as value , i}
                 <div class="">
                     <div class="flex justify-center items-center ">
-                        <p class="w-full border-2 border-white bg-slate-100 p-2 ">{value.completeName}</p>
-                        <p class="w-full border-2 border-white bg-slate-100 p-2 ">{value.precintNumber}</p>
-                        <p class="w-full border-2 border-white bg-slate-100 p-2 ">{value.completeAddress}</p>
-                        <div class="flex gap-2 w-full p-2 bg-slate-100">
-                            <Button TITLE="Delete" COLOR="bg-redColor" on:click={()=>{removeData(value.id)}}/>
-                            <Button TITLE="Edit" on:click={()=>{showEditModal(i)}}/>
+                        
+                       
+                        
+                        <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Complete Name</p>
+                        <p class="w-full border-b-2 border-white bg-slate-100 p-2 ">{value.completeName}</p>
+
+                        <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Precint #</p>
+                        <p class="w-[20%] border-b-2 border-white bg-slate-100 p-2 ">{value.precintNumber}</p>
+
+                        <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Address</p>
+                        <p class="w-full border-b-2 border-white bg-slate-100 p-2 ">{value.completeAddress}</p>
+
+                        <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Option</p>
+                        <div class="flex bg-slate-10 w-[30%]">
+                            <button class="bg-red-500 font-bold text-white w-full p-2 hover:bg-red-600 border-b-2 border-white"
+                            on:click={()=>{removeData(value.id)}}
+                            >Delete</button>
+
+                            <button class="bg-blue-500 font-bold text-white w-full p-2 hover:bg-blue-600 border-b-2 border-white"
+                            on:click={()=>{showEditModal(i)}}
+                            >Edit</button>
+                            
                         </div>
                         
                     </div>
