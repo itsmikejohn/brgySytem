@@ -8,7 +8,7 @@
 
     //database calls and hooks
     import { auth, db } from "../../db/firebase";
-    import { addDoc, collection, serverTimestamp, onSnapshot, query, orderBy, increment, deleteDoc, doc, setDoc } from "firebase/firestore";
+    import { addDoc, collection, serverTimestamp, onSnapshot, query, orderBy, increment, deleteDoc, doc, setDoc, where } from "firebase/firestore";
 
     //toggle show modal of add voter
     const showAddModal = () => {
@@ -20,6 +20,7 @@
         completeName: "",
         precintNum: "",
         completeAddress: "",
+        kwiri: "",
     }
     const addVoter = async() => {
        const colRef = collection(db, "votersList");
@@ -36,9 +37,44 @@
        })
     }
 
+    let sample = where("precintNumber", "==", 500)
+
     //database loop data
     const colRef = collection(db, "votersList");
-    const q = query(colRef, orderBy("createdAt", "desc"))
+    let q = query(colRef, orderBy("createdAt", "desc"));
+
+
+    const handleSearch = () => {
+        q = query(colRef, orderBy("createdAt", "desc"), where("precintNumber", "==", Number(listOfVotersStore.kwiri)));
+
+        onSnapshot(q, (snapshots) => {
+            let fbData = [];
+            snapshots.docs.forEach(doc => {
+                let data = {...doc.data(), id: doc.id}
+                fbData = [data, ...fbData];
+            })
+            onSnaps.set(fbData);
+        })
+
+    }
+
+    const detectInputs = () => {
+        if(listOfVotersStore.kwiri.trim().length < 1){
+            let q = query(colRef, orderBy("createdAt", "desc"));
+            onSnapshot(q, (snapshots) => {
+            let fbData = [];
+            snapshots.docs.forEach(doc => {
+                let data = {...doc.data(), id: doc.id}
+                fbData = [data, ...fbData];
+            })
+            onSnaps.set(fbData);
+        })
+        }
+    }
+
+
+
+
     onSnapshot(q, (snapshots) => {
         let fbData = [];
         snapshots.docs.forEach(doc => {
@@ -102,8 +138,13 @@
 
         
             <div class="flex flex-row-reverse items-center w-full">
-                <button class="bg-blue-400 text-white absolute p-2 border-r-2 border-black hover:bg-blue-700 font-bold">Search</button>
-                <input type="text" placeholder="Complete Name only" class="w-[40%] p-2 focus:outline-none border-2 border-black "/>
+                <button class="bg-blue-400 text-white absolute p-2 border-r-2 border-black hover:bg-blue-700 font-bold"
+                on:click={handleSearch}
+                >Search</button>
+                <input type="text" placeholder="Precint Number Only" class="w-[40%] p-2 focus:outline-none border-2 border-black " 
+                on:keyup={detectInputs}
+                bind:value={listOfVotersStore.kwiri}/>
+                
                 
             </div>
             

@@ -17,12 +17,12 @@
 
     //login to system
     const login = async() => {
-        loginStore.showLoading.LOADING = true;
+        loginStore.showLoading = true;
         await signInWithEmailAndPassword(auth, loginStore.email.BINDTHIS, loginStore.password.BINDTHIS).then((userCred) => {
             localStorage.setItem("uid", userCred.user.uid);
-            loginStore.showLoading.LOADING = false;
+            loginStore.showLoading = false;
         }).catch(error => {
-            loginStore.showLoading.LOADING = false;
+            loginStore.showLoading = false;
             loginStore.showErrorDOMmsg = error.code;
         })
     }
@@ -37,7 +37,7 @@
         <Inputs TYPE="email" PLACEHOLDER="Email" TITLE="Email" COLOR="white" bind:this={loginStore.email}/>
         <Inputs TYPE="password" PLACEHOLDER="Password" TITLE="Password" COLOR="white" bind:this={loginStore.password}/>
         <div class="mt-2">
-            <Button TITLE="Login" on:click={login} bind:this={loginStore.showLoading}/>
+            <Button TITLE="Login" on:click={login} LOADING={loginStore.showLoading}/>
         </div>
         <div class="mt-2">
             <p class="text-center text-[#ff0000] font-bold">{loginStore.showErrorDOMmsg}</p>
