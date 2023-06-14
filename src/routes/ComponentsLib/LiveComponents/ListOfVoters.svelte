@@ -21,6 +21,7 @@
         precintNum: "",
         completeAddress: "",
         kwiri: "",
+        trigger: false,
     }
     const addVoter = async() => {
        const colRef = collection(db, "votersList");
@@ -45,16 +46,20 @@
 
 
     const handleSearch = () => {
-        q = query(colRef, orderBy("createdAt", "desc"), where("precintNumber", "==", Number(listOfVotersStore.kwiri)));
+        if(listOfVotersStore.trigger){
+            q = query(colRef, orderBy("createdAt", "desc"), where("precintNumber", "==", Number(listOfVotersStore.kwiri)));
 
-        onSnapshot(q, (snapshots) => {
-            let fbData = [];
-            snapshots.docs.forEach(doc => {
-                let data = {...doc.data(), id: doc.id}
-                fbData = [data, ...fbData];
+            onSnapshot(q, (snapshots) => {
+                let fbData = [];
+                snapshots.docs.forEach(doc => {
+                    let data = {...doc.data(), id: doc.id}
+                    fbData = [data, ...fbData];
+                })
+                onSnaps.set(fbData);
             })
-            onSnaps.set(fbData);
-        })
+
+            listOfVotersStore.trigger = false;
+        }
 
     }
 
@@ -68,7 +73,11 @@
                 fbData = [data, ...fbData];
             })
             onSnaps.set(fbData);
+
+            listOfVotersStore.trigger = false;
         })
+        }else{
+            listOfVotersStore.trigger = true;
         }
     }
 
@@ -233,7 +242,7 @@
                         <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Address</p>
                         <p class="w-full border-b-2 border-white bg-slate-100 p-2 ">{value.completeAddress}</p>
 
-                        <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Option</p>
+                        
                         <div class="flex bg-slate-10 w-[30%]">
                             <button class="bg-red-500 font-bold text-white w-full p-2 hover:bg-red-600 border-b-2 border-white"
                             on:click={()=>{removeData(value.id)}}

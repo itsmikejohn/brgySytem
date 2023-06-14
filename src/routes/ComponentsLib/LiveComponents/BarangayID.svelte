@@ -7,7 +7,7 @@
 
     //database calls and hooks
     import { auth, db } from "../../db/firebase";
-    import { onSnapshot, addDoc, collection, serverTimestamp, increment, doc, deleteDoc, query, orderBy, setDoc } from "firebase/firestore";
+    import { onSnapshot, addDoc, collection, serverTimestamp, increment, doc, deleteDoc, query, orderBy, setDoc, where } from "firebase/firestore";
 
     //handler to show add modal
     const toShowAddModal = () => {
@@ -22,6 +22,8 @@
         gender: "",
         height: "",
         weight: "",
+        kwiri: "",
+        trigger: false,
 
     }
 
@@ -81,17 +83,66 @@
     const editValueHandler = (data) => {
         compareIDvalue.set(data);
     }
+
+    const handleSearch = () => {
+        const q = query(colRef, orderBy("createdAt", "desc"), where("completeName", "==", bgyVarStore.kwiri))
+        onSnapshot(q, (snapshots) => {
+            let fbData = [];
+            snapshots.docs.forEach(doc => {
+                let data = {...doc.data(), id: doc.id};
+                fbData = [data, ...fbData];
+            })
+            onSnapsBgyID.set(fbData);
+
+        })
+
+        bgyVarStore.trigger = false;
+    }
+
+    const detectInputs = () => {
+        if(bgyVarStore.kwiri.trim().length < 1){
+            const q = query(colRef, orderBy("createdAt", "desc"))
+            onSnapshot(q, (snapshots) => {
+                let fbData = [];
+                snapshots.docs.forEach(doc => {
+                    let data = {...doc.data(), id: doc.id};
+                    fbData = [data, ...fbData];
+                })
+                onSnapsBgyID.set(fbData);
+                
+            })
+
+            bgyVarStore.trigger = false;
+        }else{
+            bgyVarStore.trigger = true;
+        }
+    }
 </script>
 
-<div class="m-2  mx-auto">
-    <div class="min-h-[50vh] p-4">
-        <div class="max-w-fit flex gap-2">
-            <div class="">
-                <Button TITLE="Add Barangay ID" on:click={toShowAddModal}/>
+<div class="m-2  mx-auto text-xs">
+    <div class="min-h-[50vh] p-10">
+        <div class=" flex gap-2 items-center mb-2">
+            <div class="w-full flex gap-2">
+                <div class="">
+                    <Button TITLE="Add Barangay ID" on:click={toShowAddModal}/>
+                </div>
+    
+                <div class="">
+                    <Button TITLE="Print" on:click={() => showPrintModel.set(true)}/>
+                </div>
             </div>
 
-            <div class="">
-                <Button TITLE="Print" on:click={() => showPrintModel.set(true)}/>
+        
+            <div class="flex flex-row-reverse items-center w-full">
+                <button class="bg-blue-400 text-white absolute p-2 border-r-2 border-black hover:bg-blue-700 font-bold"
+                on:click={handleSearch}
+                >Search</button>
+                <input type="text" placeholder="Complete Name Only" class="w-[40%] p-2 focus:outline-none border-2 border-black " 
+                on:keyup={detectInputs}
+                bind:value={bgyVarStore.kwiri}
+                />
+                
+                
             </div>
         </div>
 
@@ -140,16 +191,6 @@
             
         {/if}
         
-
-        <div class="flex  justify-center items-center mt-2">
-            <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Name</p>
-            <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Address</p>
-            <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Birthdate</p>
-            <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Gender</p>
-            <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Height</p>
-            <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Weight</p>
-            <p class="text-xl sm:text-2xl font-bold text-left w-full bg-slate-200 p-2 border-2 border-white">Option</p>
-        </div>
         
         {#if $showAddModal}
         <div class="flex flex-col gap-2 bg-white p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-guiColor z-10">
@@ -190,16 +231,35 @@
         <div class="">
             {#each $onSnapsBgyID as value, i}
             <div class="flex justify-center items-center ">
-                <p class="w-full border-2 border-white bg-slate-100 p-2 ">{value.completeName}</p>
+                <p class="w-[30%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Complete Name</p>
+                <p class="w-full border-b-2 border-white bg-slate-100 p-2 ">{value.completeName}</p>
+
+                <p class="w-[10%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Address</p>
                 <p class="w-full border-2 border-white bg-slate-100 p-2 ">{value.address}</p>
-                <p class="w-full border-2 border-white bg-slate-100 p-2 ">{value.birthdate}</p>
-                <p class="w-full border-2 border-white bg-slate-100 p-2 ">{value.gender}</p>
-                <p class="w-full border-2 border-white bg-slate-100 p-2 ">{value.height}</p>
-                <p class="w-full border-2 border-white bg-slate-100 p-2 ">{value.weight}</p>
-                <div class="flex gap-2 w-full p-2 bg-slate-100">
-                    <Button TITLE="Delete" COLOR="bg-redColor" on:click={removeData(value.id)}/>
-                    <Button TITLE="Edit" on:click={()=>{editValueHandler(i)}}/>
+
+                <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Birth date</p>
+                <p class="w-[20%] border-2 border-white bg-slate-100 p-2 ">{value.birthdate}</p>
+
+                <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Sex</p>
+                <p class="w-[20%] border-2 border-white bg-slate-100 p-2 ">{value.gender}</p>
+
+                <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Height</p>
+                <p class="w-[20%] border-2 border-white bg-slate-100 p-2 ">{value.height}</p>
+
+                <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Weight</p>
+                <p class="w-[20%] border-2 border-white bg-slate-100 p-2 ">{value.weight}</p>
+
+                <div class="flex bg-slate-10 w-[30%]">
+                    <button class="bg-red-500 font-bold text-white w-full p-2 hover:bg-red-600 border-b-2 border-white"
+                    on:click={removeData(value.id)}
+                    >Delete</button>
+
+                    <button class="bg-blue-500 font-bold text-white w-full p-2 hover:bg-blue-600 border-b-2 border-white"
+                    on:click={()=>{editValueHandler(i)}}
+                    >Edit</button>
+                    
                 </div>
+
                 {#if $compareIDvalue === i}
                     <div class="">
                         <div class="flex flex-col gap-2 bg-guiColor p-4 max-w-fit mx-auto rounded-lg mt-2 absolute left-0 right-0 border-2 border-slate-200 z-10">
