@@ -1,11 +1,10 @@
 <script>
     import Button from "../GeneralComponents/Button.svelte";
     import Inputs from "../GeneralComponents/Inputs.svelte";
-
-    import IconLogo from "../Images/logo.png";
   
     import {onSnapsBgyID, compareIDvalue, showAddModal } from "../BoundComponents/clickOutside";
     import { showPrintModel, formattedDate } from "./stateStore";
+    import bgyClearance from "../Images/bgyClearance.jpg";
 
     //database calls and hooks
     import { auth, db } from "../../db/firebase";
@@ -133,7 +132,7 @@
                 </div>
     
                 <div class="">
-                    <Button TITLE="Print" on:click={() => showPrintModel.set(true)}/>
+                    <Button TITLE="Generate Barangay ID" on:click={() => showPrintModel.set(true)}/>
                 </div>
             </div>
 
@@ -153,9 +152,16 @@
 
 
         {#if $showPrintModel}
-            <div class="fixed bottom-0 top-0 left-0 right-0 bg-white text-xs">
-                <img src={IconLogo} alt="loading" class="w-20"/>
-                
+            <div class="absolute left-0 right-0 top-0 bg-[#272822] ">
+                <div class="mx-auto w-[900px]">
+                    <div class="flex gap-2 p-2">
+                        <a href={bgyClearance} download={bgyClearance} class="w-full"><p 
+                            class="text-white font-semibold bg-red-500 p-2 rounded-lg text-center transition-all hover:scale-95 active:scale-105"
+                            >Download Barangay ID</p></a>
+                        <Button TITLE="Cancel" on:click={() => showPrintModel.set(false)}/>
+                    </div>
+                    <img src={bgyClearance} alt="loading" class=""/>
+                </div>
             </div>
             
         {/if}

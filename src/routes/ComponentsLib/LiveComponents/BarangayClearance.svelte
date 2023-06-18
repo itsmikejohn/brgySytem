@@ -5,7 +5,7 @@
     import {onSnapsClearance, showClearanceAddModal, compareClearanceValue } from "../BoundComponents/clickOutside";
     import { showPrintModel, formattedDate } from "./stateStore";
 
-    import bgyClerance from "../Images/bgyClearance.jpg";
+    import bgyClearance from "../Images/bgyClearance.jpg";
 
 
     //database calls and hooks
@@ -131,7 +131,7 @@
                 </div>
 
                 <div class="">
-                    <Button TITLE="Print Clearance" on:click={() => showPrintModel.set(true)}/>
+                    <Button TITLE="Generate Barangay Clearance" on:click={() => showPrintModel.set(true)}/>
                 </div>
             </div>
 
@@ -152,12 +152,12 @@
                 <div class="absolute left-0 right-0 mt-[100vh] bg-[#272822]">
                     <div class="mx-auto w-[900px]">
                         <div class="flex gap-2 p-2">
-                            <a href={bgyClerance} download={bgyClerance} class="w-full"><p 
+                            <a href={bgyClearance} download={bgyClearance} class="w-full"><p 
                                 class="text-white font-semibold bg-red-500 p-2 rounded-lg text-center transition-all hover:scale-95 active:scale-105"
                                 >Download Clearance</p></a>
                             <Button TITLE="Cancel" on:click={() => showPrintModel.set(false)}/>
                         </div>
-                        <img src={bgyClerance} alt="loading" class=""/>
+                        <img src={bgyClearance} alt="loading" class=""/>
                     </div>
                 </div>
                 
