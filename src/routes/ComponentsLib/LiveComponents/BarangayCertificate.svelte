@@ -21,6 +21,7 @@
         birthdate: "",
         lengthOfStay: "",
         purpose: "",
+        dateOfAppointment: "",
         kwiri: "",
         trigger: false,
 
@@ -36,6 +37,7 @@
             birthdate: bgyVarStore.birthdate.BINDTHIS,
             lengthOfStay: bgyVarStore.lengthOfStay.BINDTHIS,
             purpose: bgyVarStore.purpose.BINDTHIS,
+            dateOfAppointment: bgyVarStore.dateOfAppointment.BINDTHIS,
             bgyCertificateCounter: increment(1),
             
         }).then(() => {
@@ -73,6 +75,7 @@
             birthdate: bgyVarStore.birthdate.BINDTHIS,
             lengthOfStay: bgyVarStore.lengthOfStay.BINDTHIS,
             purpose: bgyVarStore.purpose.BINDTHIS,
+            dateOfAppointment: bgyVarStore.dateOfAppointment.BINDTHIS,
         }, {merge:true})
     }
 
@@ -213,6 +216,10 @@
             <div class="">
                 <Inputs TITLE="Complete Address:" PLACEHOLDER="Complete Address" bind:this={bgyVarStore.address}/>
             </div>
+
+            <div class="">
+                <Inputs TITLE="Date Of Appointment" TYPE="date" PLACEHOLDER="" bind:this={bgyVarStore.dateOfAppointment}/>
+            </div>
             
             <div class="flex gap-2">
                 <Button TITLE="Submit" on:click={submitData}/>
@@ -223,20 +230,24 @@
         <div class="">
             {#each $onSnapsBgyCert as value, i}
             <div class="flex justify-center items-center ">
-                <p class="w-[23%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Complete Name</p>
+                <p class="w-[25%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Complete Name</p>
                 <p class="w-full border-b-2 border-white bg-slate-100 p-2 ">{value.completeName}</p>
 
                 <p class="w-[10%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Address</p>
                 <p class="w-full border-b-2 border-white bg-slate-100 p-2 ">{value.address}</p>
 
-                <p class="w-[15%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Birth date</p>
+                <p class="w-[17%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Birth date</p>
                 <p class="w-[20%] border-2 border-white bg-slate-100 p-2 ">{value.birthdate}</p>
 
-                <p class="w-[20%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Length Of Stay</p>
+                <p class="w-[25%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Length Of Stay</p>
                 <p class="w-[20%] border-2 border-white bg-slate-100 p-2 ">{value.lengthOfStay}</p>
 
                 <p class="w-[12%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Purpose</p>
                 <p class="w-[20%] border-2 border-white bg-slate-100 p-2 ">{value.purpose}</p>
+
+                <p class="w-[33%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Date Of Appointment</p>
+                <p class="w-[20%] border-2 border-white bg-slate-100 p-2 ">{value.dateOfAppointment}</p>
+                
                 
                 <div class="flex bg-slate-10 w-[30%]">
                     <button class="bg-red-500 font-bold text-white w-full p-2 hover:bg-red-600 border-b-2 border-white"
@@ -275,6 +286,10 @@
                 
                             <div class="">
                                 <Inputs TITLE="Complete Address:" PLACEHOLDER="Complete Address" bind:this={bgyVarStore.address}/>
+                            </div>
+
+                            <div class="">
+                                <Inputs TITLE="Date Of Appointment:" TYPE="date" PLACEHOLDER="" bind:this={bgyVarStore.dateOfAppointment}/>
                             </div>
                             
                             <div class="flex gap-2">
