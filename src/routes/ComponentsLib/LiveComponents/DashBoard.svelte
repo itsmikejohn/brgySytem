@@ -77,40 +77,40 @@
     <!--Regitered voters-->
     <div in:fly={{y:300, duration:1000}}>
         
-        <div class="text-xs font-bold text-white  p-4 bg-black rounded-lg m-2 absolute">{counter}</div>
+        <div class="text-xs font-bold text-white  p-2 bg-black rounded-lg m-2 absolute">{counter}</div>
         <div class="max- bg-guiColor">
-            <p class="text-xs font-bold p-16 cursor-not-allowed text-white">REGISTERED VOTERS </p>
+            <p class="text-xs font-bold p-14 cursor-not-allowed text-white">REGISTERED VOTERS </p>
         </div>
     </div>
 
     <!--TOTAL ID REQUEST-->
     <div in:fly={{y:-300, duration:1000}}>
-        <div class="text-xs font-bold text-white  p-4 bg-black rounded-lg m-2 absolute">{counter2}</div>
+        <div class="text-xs font-bold text-white  p-2 bg-black rounded-lg m-2 absolute">{counter2}</div>
         <div class="max- bg-guiColor">
-            <p class="text-xs font-bold p-16 cursor-not-allowed text-white">TOTAL BARANGAY ID REQUEST</p>
+            <p class="text-xs font-bold p-14 cursor-not-allowed text-white">TOTAL ID REQUEST</p>
         </div>
     </div>
     <!--TOTAL CERTIFICATE REQUEST-->
     <div in:fly={{y:300, duration:1000}}>
-        <div class="text-xs font-bold text-white  p-4 bg-black rounded-lg m-2 absolute">{counter3}</div>
+        <div class="text-xs font-bold text-white  p-2 bg-black rounded-lg m-2 absolute">{counter3}</div>
         <div class="max- bg-guiColor">
-            <p class="text-xs font-bold p-16 cursor-not-allowed text-white">TOTAL BARANGAY CERTIFICATE REQUEST</p>
+            <p class="text-xs font-bold p-14 cursor-not-allowed text-white">TOTAL CERTIFICATE REQUEST</p>
         </div>
     </div>
 
     <!--TOTAL CLEARANCE REQUEST-->
     <div in:fly={{y:-300, duration:1000}}>
-        <div class="text-xs font-bold text-white  p-4 bg-black rounded-lg m-2 absolute">{counter4}</div>
+        <div class="text-xs font-bold text-white  p-2 bg-black rounded-lg m-2 absolute">{counter4}</div>
         <div class="max- bg-guiColor">
-            <p class="text-xs font-bold p-16 cursor-not-allowed text-white">TOTAL CLEARANCE REQUEST</p>
+            <p class="text-xs font-bold p-14 cursor-not-allowed text-white">TOTAL CLEARANCE REQUEST</p>
         </div>
     </div>
 
     <!--TOTAL OF COMPLAINT-->
     <div in:fly={{y:300, duration:1000}}>
-        <div class="text-xs font-bold text-white  p-4 bg-black rounded-lg m-2 absolute">{counter5}</div>
+        <div class="text-xs font-bold text-white  p-2 bg-black rounded-lg m-2 absolute">{counter5}</div>
         <div class="max- bg-guiColor">
-            <p class="text-xs font-bold p-16 cursor-not-allowed text-white">TOTAL OF COMPLAINT</p>
+            <p class="text-xs font-bold p-14 cursor-not-allowed text-white">TOTAL COMPLAINT</p>
         </div>
     </div>
 </div>
