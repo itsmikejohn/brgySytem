@@ -29,7 +29,7 @@
 
 </script>
 
-<div class="sm:max-w-xl mx-auto">
+<div class="sm:max-w-[400px] mt-[15vh] mx-auto">
     <div class="p-10 flex flex-col gap-2 bg-guiColor m-2 rounded-lg">
         <div class="flex justify-center">
             <img src={loginLogo} alt="loading" class="w-[200px]"/>
