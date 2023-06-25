@@ -94,7 +94,7 @@
     <div in:fly={{y:300, duration:1000}}>
         <div class="text-xs font-bold text-white  p-2 bg-black rounded-lg m-2 absolute">{counter3}</div>
         <div class="max- bg-guiColor">
-            <p class="text-xs font-bold p-14 cursor-not-allowed text-white">TOTAL CERTIFICATE REQUEST</p>
+            <p class="text-xs font-bold p-14 cursor-not-allowed text-white">TOTAL CERTIFICATE</p>
         </div>
     </div>
 
@@ -102,7 +102,7 @@
     <div in:fly={{y:-300, duration:1000}}>
         <div class="text-xs font-bold text-white  p-2 bg-black rounded-lg m-2 absolute">{counter4}</div>
         <div class="max- bg-guiColor">
-            <p class="text-xs font-bold p-14 cursor-not-allowed text-white">TOTAL CLEARANCE REQUEST</p>
+            <p class="text-xs font-bold p-14 cursor-not-allowed text-white">TOTAL CLEARANCE</p>
         </div>
     </div>
 
