@@ -34,8 +34,8 @@
         <div class="flex justify-center">
             <img src={loginLogo} alt="loading" class="w-[200px]"/>
         </div>
-        <Inputs TYPE="email" PLACEHOLDER="Email" TITLE="Email" COLOR="white" bind:this={loginStore.email}/>
-        <Inputs TYPE="password" PLACEHOLDER="Password" TITLE="Password" COLOR="white" bind:this={loginStore.password}/>
+        <Inputs TYPE="email" PLACEHOLDER="Admin Email" TITLE="Email" bind:this={loginStore.email}/>
+        <Inputs TYPE="password" PLACEHOLDER="Admin Password" TITLE="Password" bind:this={loginStore.password}/>
         <div class="mt-2">
             <Button TITLE="Login" on:click={login} LOADING={loginStore.showLoading}/>
         </div>
