@@ -6,10 +6,49 @@
     import logo from "../Images/logo.png";
     import { showSlider, navSelections } from './clickOutside.js'
 
+    import dashboardIcon from "../Images/SVGs/dashb.svg";
+    import listIcon from "../Images/SVGs/ListIcon.svg";
+    import brgyID from "../Images/SVGs/brgyID.svg";
+    import bgryCert from "../Images/SVGs/brgyCert.svg";
+    import brgyClear from "../Images/SVGs/brgyClear.svg";
+    import complaints from "../Images/SVGs/complaints.svg";
+
     import Button from "../GeneralComponents/Button.svelte";
 
     //slider list of menu
-    let selections = ["Dashboard", "List of registered voters", "Barangay ID", "Barangay Certificate", "Barangay Clearance", "Complaints"]; 
+    let selections = ["Dashboard", "List of registered voters", "Barangay ID", "Barangay Certificate", "Barangay Clearance", "Complaints"];
+    
+    let newSelections = [
+        {
+            svg:  dashboardIcon,
+            nav: "Dashboard" 
+        },
+
+        {
+            svg: listIcon,
+            nav: "List of registered voters"
+        },
+
+        {
+            svg: brgyID,
+            nav: "Barangay ID"
+        },
+
+        {
+            svg: bgryCert,
+            nav: "Barangay Certificate"
+        },
+
+        {
+            svg: brgyClear,
+            nav: "Barangay Clearance"
+        },
+
+        {
+            svg: complaints,
+            nav: "Complaints"
+        }
+    ]
 
     //value grabber from menu
     const getValue = (data) => {
@@ -39,17 +78,19 @@
             <p class="text-white font-bold text-3xl p-4">Hello, Administrator</p>
         </div>
 
-        {#each selections as value}
-        <div class="">
-            <p class="p-4 text-white hover:bg-[#414339] sm:text-2xl cursor-pointer transition-all hover:scale-105 active:scale-95"
-            class:active={$navSelections === value}
-            on:keydown={() => {}}
-            on:click={() => {getValue(value)}}
-
-            >{value}</p>
+        <div class="border-2 m-2">
+        {#each newSelections as value}
+        <div class="p-2">
+            <button class="flex gap-2 items-center w-full p-2 transition-all hover:scale-95 hover:bg-[#414339 active:scale-105]"
+            class:active={$navSelections === value.nav}
+            on:click={() => {getValue(value.nav)}}
+            >
+                <img src={value.svg} alt="loading" class="w-5" />
+                <p class="text-white font-semibold text-2xl">{value.nav}</p>
+            </button>
         </div>
         {/each}
-        
+        </div>
         <div class="mt-5">
             <Button TITLE="Close" on:click={back}/>
         </div>
