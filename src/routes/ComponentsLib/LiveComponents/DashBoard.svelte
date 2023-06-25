@@ -77,41 +77,40 @@
     <!--Regitered voters-->
     <div in:fly={{y:300, duration:1000}}>
         
-        <div class="text-xl font-bold text-white absolute p-4 bg-black rounded-lg m-2">{counter}</div>
-        <div class="max-w-[250px] min-h-[25vh] bg-guiColor">
-            
-            <p class="text-xl font-bold p-16 cursor-not-allowed text-white">REGISTERED VOTERS </p>
+        <div class="text-xs font-bold text-white  p-4 bg-black rounded-lg m-2 absolute">{counter}</div>
+        <div class="max- bg-guiColor">
+            <p class="text-xs font-bold p-16 cursor-not-allowed text-white">REGISTERED VOTERS </p>
         </div>
     </div>
 
     <!--TOTAL ID REQUEST-->
     <div in:fly={{y:-300, duration:1000}}>
-        <div class="text-xl font-bold text-white absolute p-4 bg-black rounded-lg m-2">{counter2}</div>
-        <div class="max-w-[250px] min-h-[25vh] bg-guiColor">
-            <p class="text-xl font-bold p-16 cursor-not-allowed text-white">TOTAL BARANGAY ID REQUEST</p>
+        <div class="text-xs font-bold text-white  p-4 bg-black rounded-lg m-2 absolute">{counter2}</div>
+        <div class="max- bg-guiColor">
+            <p class="text-xs font-bold p-16 cursor-not-allowed text-white">TOTAL BARANGAY ID REQUEST</p>
         </div>
     </div>
     <!--TOTAL CERTIFICATE REQUEST-->
     <div in:fly={{y:300, duration:1000}}>
-        <div class="text-xl font-bold text-white absolute p-4 bg-black rounded-lg m-2">{counter3}</div>
-        <div class="max-w-[250px] min-h-[25vh] bg-guiColor">
-            <p class="text-xl font-bold p-16 cursor-not-allowed text-white">TOTAL BARANGAY CERTIFICATE REQUEST</p>
+        <div class="text-xs font-bold text-white  p-4 bg-black rounded-lg m-2 absolute">{counter3}</div>
+        <div class="max- bg-guiColor">
+            <p class="text-xs font-bold p-16 cursor-not-allowed text-white">TOTAL BARANGAY CERTIFICATE REQUEST</p>
         </div>
     </div>
 
     <!--TOTAL CLEARANCE REQUEST-->
     <div in:fly={{y:-300, duration:1000}}>
-        <div class="text-xl font-bold text-white absolute p-4 bg-black rounded-lg m-2">{counter4}</div>
-        <div class="max-w-[250px] min-h-[25vh] bg-guiColor">
-            <p class="text-xl font-bold p-16 cursor-not-allowed text-white">TOTAL CLEARANCE REQUEST</p>
+        <div class="text-xs font-bold text-white  p-4 bg-black rounded-lg m-2 absolute">{counter4}</div>
+        <div class="max- bg-guiColor">
+            <p class="text-xs font-bold p-16 cursor-not-allowed text-white">TOTAL CLEARANCE REQUEST</p>
         </div>
     </div>
 
     <!--TOTAL OF COMPLAINT-->
     <div in:fly={{y:300, duration:1000}}>
-        <div class="text-xl font-bold text-white absolute p-4 bg-black rounded-lg m-2">{counter5}</div>
-        <div class="max-w-[250px] min-h-[25vh] bg-guiColor">
-            <p class="text-xl font-bold p-16 cursor-not-allowed text-white">TOTAL OF COMPLAINT</p>
+        <div class="text-xs font-bold text-white  p-4 bg-black rounded-lg m-2 absolute">{counter5}</div>
+        <div class="max- bg-guiColor">
+            <p class="text-xs font-bold p-16 cursor-not-allowed text-white">TOTAL OF COMPLAINT</p>
         </div>
     </div>
 </div>

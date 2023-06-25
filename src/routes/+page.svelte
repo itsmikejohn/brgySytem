@@ -22,7 +22,7 @@
 
 </script>
 
-<main>
+<main >
     {#if $showNav}
         <Nav />
     {:else}
