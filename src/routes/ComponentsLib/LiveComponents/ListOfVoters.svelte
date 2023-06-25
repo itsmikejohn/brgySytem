@@ -1,6 +1,9 @@
 <script>
     import Button from "../GeneralComponents/Button.svelte";
     import Inputs from "../GeneralComponents/Inputs.svelte";
+    import ListIcon from "../Images/SVGs/ListIcon.svg";
+    import { fly } from "svelte/transition";
+    
 
     import { showPrintModel, formattedDate } from "./stateStore";
 
@@ -225,10 +228,10 @@
         {/if}
         <!--End of add voters-->
 
-        <div class="">
+        <div class="" in:fly={{x:400, duration:1000}}>
 
             {#each $onSnaps as value , i}
-                <div class="">
+                <div class="" in:fly={{x:400, duration:1000}}>
                     <div class="flex justify-center items-center ">
                         
                        

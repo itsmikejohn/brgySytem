@@ -1,7 +1,7 @@
 <script>
     import Button from "../GeneralComponents/Button.svelte";
     import Inputs from "../GeneralComponents/Inputs.svelte";
-  
+    import { fly } from "svelte/transition";
     import {onSnapsBgyID, compareIDvalue, showAddModal } from "../BoundComponents/clickOutside";
     import { showPrintModel, formattedDate } from "./stateStore";
     import bgyClearance from "../Images/bgyClearance.jpg";
@@ -207,9 +207,9 @@
             </div>
         </div>
         {/if}
-        <div class="">
+        <div class="" in:fly={{x:-400, duration:1000}}>
             {#each $onSnapsBgyID as value, i}
-            <div class="flex justify-center items-center ">
+            <div class="flex justify-center items-center " in:fly={{x:-400, duration:1000}}>
                 <p class="w-[30%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Complete Name</p>
                 <p class="w-[70%] border-b-2 border-white bg-slate-100 p-2 ">{value.completeName}</p>
 

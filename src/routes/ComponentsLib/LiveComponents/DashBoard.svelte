@@ -3,6 +3,8 @@
     import { auth, db } from "../../db/firebase";
     import { onSnapshot, collection, doc  } from "firebase/firestore";
 
+    import { fly } from "svelte/transition";
+
 
     //listofvoters count
     let counter = 0;
@@ -73,7 +75,7 @@
 
 <div class="flex justify-start flex-wrap gap-2 m-10">
     <!--Regitered voters-->
-    <div>
+    <div in:fly={{y:300, duration:1000}}>
         
         <div class="text-xl font-bold text-white absolute p-4 bg-black rounded-lg m-2">{counter}</div>
         <div class="max-w-[250px] min-h-[25vh] bg-guiColor">
@@ -83,14 +85,14 @@
     </div>
 
     <!--TOTAL ID REQUEST-->
-    <div>
+    <div in:fly={{y:-300, duration:1000}}>
         <div class="text-xl font-bold text-white absolute p-4 bg-black rounded-lg m-2">{counter2}</div>
         <div class="max-w-[250px] min-h-[25vh] bg-guiColor">
             <p class="text-xl font-bold p-16 cursor-not-allowed text-white">TOTAL BARANGAY ID REQUEST</p>
         </div>
     </div>
     <!--TOTAL CERTIFICATE REQUEST-->
-    <div>
+    <div in:fly={{y:300, duration:1000}}>
         <div class="text-xl font-bold text-white absolute p-4 bg-black rounded-lg m-2">{counter3}</div>
         <div class="max-w-[250px] min-h-[25vh] bg-guiColor">
             <p class="text-xl font-bold p-16 cursor-not-allowed text-white">TOTAL BARANGAY CERTIFICATE REQUEST</p>
@@ -98,7 +100,7 @@
     </div>
 
     <!--TOTAL CLEARANCE REQUEST-->
-    <div>
+    <div in:fly={{y:-300, duration:1000}}>
         <div class="text-xl font-bold text-white absolute p-4 bg-black rounded-lg m-2">{counter4}</div>
         <div class="max-w-[250px] min-h-[25vh] bg-guiColor">
             <p class="text-xl font-bold p-16 cursor-not-allowed text-white">TOTAL CLEARANCE REQUEST</p>
@@ -106,7 +108,7 @@
     </div>
 
     <!--TOTAL OF COMPLAINT-->
-    <div>
+    <div in:fly={{y:300, duration:1000}}>
         <div class="text-xl font-bold text-white absolute p-4 bg-black rounded-lg m-2">{counter5}</div>
         <div class="max-w-[250px] min-h-[25vh] bg-guiColor">
             <p class="text-xl font-bold p-16 cursor-not-allowed text-white">TOTAL OF COMPLAINT</p>

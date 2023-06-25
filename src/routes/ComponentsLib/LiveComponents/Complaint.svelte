@@ -1,7 +1,9 @@
 <script>
     import Button from "../GeneralComponents/Button.svelte";
     import Inputs from "../GeneralComponents/Inputs.svelte";
-  
+    import { fly } from "svelte/transition";
+
+
     import {onSnapsComplaint, showComplaintAddModal, compareComplaintValue } from "../BoundComponents/clickOutside";
     import { formattedDate, showPrintModel } from "./stateStore";
 
@@ -226,9 +228,9 @@
             </div>
         </div>
         {/if}
-        <div class="">
+        <div class="" in:fly={{x:400, duration:1000}}>
             {#each $onSnapsComplaint as value, i}
-            <div class="flex justify-center items-center ">
+            <div class="flex justify-center items-center " in:fly={{x:400, duration:1000}}>
                 <p class="w-[10%] font-bold border-b-2 border-white bg-slate-300 p-2 ">Date</p>
                 <p class="w-[23%] border-2 border-white bg-slate-100 p-2">{value.date}</p>
 
