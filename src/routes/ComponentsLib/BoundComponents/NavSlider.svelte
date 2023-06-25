@@ -81,7 +81,7 @@
         <div class="border-2 m-2">
         {#each newSelections as value}
         <div class="p-2">
-            <button class="flex gap-2 items-center w-full p-2 transition-all hover:scale-95 hover:bg-[#414339 active:scale-105]"
+            <button class="flex gap-2 items-center w-full p-2 transition-all hover:scale-95 hover:bg-[#414339] active:scale-105"
             class:active={$navSelections === value.nav}
             on:click={() => {getValue(value.nav)}}
             >
